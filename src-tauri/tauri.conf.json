@@ -8,7 +8,7 @@
     "withGlobalTauri": true
   },
   "package": {
-    "productName": "tauri-ts-react-vite-tailwind-extras",
+    "productName": "Staryourney",
     "version": "0.1.0"
   },
   "tauri": {
@@ -30,8 +30,8 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.tauri.dev",
-      "longDescription": "",
+      "identifier": "com.jkominovic.staryourney",
+      "longDescription": "Start your journey. Give your brain a break and dump all your amazing ideas here.",
       "macOS": {
         "entitlements": null,
         "exceptionDomain": "",
@@ -40,8 +40,8 @@
         "signingIdentity": null
       },
       "resources": [],
-      "shortDescription": "",
-      "targets": "all",
+      "shortDescription": "Start your journey. Give your brain a break and dump all your amazing ideas here.",
+      "targets": "dmg",
       "windows": {
         "certificateThumbprint": null,
         "digestAlgorithm": "sha256",
@@ -54,12 +54,16 @@
     "updater": {
       "active": false
     },
+    "macOSPrivateApi": true,
     "windows": [
       {
         "fullscreen": false,
         "height": 600,
         "resizable": true,
-        "title": "tauri-ts-react-vite-tailwind-extras",
+        "transparent": true,
+        "titleBarStyle": "Overlay",
+        "hiddenTitle": true,
+        "title": "Staryourney",
         "width": 800
       }
     ]
