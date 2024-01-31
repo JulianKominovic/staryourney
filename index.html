@@ -7,8 +7,17 @@
     <title>Tauri + React + TS</title>
   </head>
 
-  <body class="bg-transparent">
+  <body class="dark">
     <div id="root"></div>
+    <script>
+      if (
+        window &&
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+      ) {
+        document.documentElement.classList.add("dark");
+      }
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

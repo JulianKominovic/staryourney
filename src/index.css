@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -9,63 +9,100 @@
 
     --card: 0 0% 100%;
     --card-foreground: 0 0% 3.9%;
- 
+
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 3.9%;
- 
+
     --primary: 0 0% 9%;
     --primary-foreground: 0 0% 98%;
- 
+
     --secondary: 0 0% 96.1%;
     --secondary-foreground: 0 0% 9%;
- 
+
     --muted: 0 0% 96.1%;
     --muted-foreground: 0 0% 45.1%;
- 
+
     --accent: 0 0% 96.1%;
     --accent-foreground: 0 0% 9%;
- 
+
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
     --border: 0 0% 89.8%;
     --input: 0 0% 89.8%;
     --ring: 0 0% 3.9%;
- 
+
     --radius: 0.5rem;
   }
- 
-  .dark {
-    --background: 0 0% 3.9%;
+
+  /* IMPORTANTISIMO ESTO
+  https://github.com/shadcn-ui/ui/issues/313#issuecomment-1676513456
+  
+  */
+  /* :root[class~="dark"] {
+    --background: 0 0% 3.9% / 20%;
     --foreground: 0 0% 98%;
- 
-    --card: 0 0% 3.9%;
+
+    --card: 0 0% 3.9% / 20%;
     --card-foreground: 0 0% 98%;
- 
-    --popover: 0 0% 3.9%;
+
+    --popover: 0 0% 3.9% / 20%;
     --popover-foreground: 0 0% 98%;
- 
-    --primary: 0 0% 98%;
+
+    --primary: 0 0% 98% / 20%;
     --primary-foreground: 0 0% 9%;
- 
-    --secondary: 0 0% 14.9%;
+
+    --secondary: 0 0% 14.9% / 20%;
     --secondary-foreground: 0 0% 98%;
- 
-    --muted: 0 0% 14.9%;
+
+    --muted: 0 0% 14.9% / 20%;
     --muted-foreground: 0 0% 63.9%;
- 
-    --accent: 0 0% 14.9%;
+
+    --accent: 0 0% 14.9% / 20%;
     --accent-foreground: 0 0% 98%;
- 
-    --destructive: 0 62.8% 30.6%;
+
+    --destructive: 0 62.8% 30.6% / 20%;
     --destructive-foreground: 0 0% 98%;
- 
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
+
+    --border: 0 0% 14.9% / 20%;
+    --input: 0 0% 14.9% / 20%;
+    --ring: 0 0% 83.1% / 20%;
+  } */
+
+  :root[class~="dark"] {
+    --gradient: #e0eafc;
+
+    --background: 232 53.3% 7.44%;
+    --foreground: 232 8.2% 99.65%;
+
+    --muted: 232 41% 27.900000000000002%;
+    --muted-foreground: 232 8.2% 59.3%;
+
+    --popover: 232 48.6% 12.09%;
+    --popover-foreground: 232 8.2% 99.65%;
+
+    --card: 232 48.6% 12.09%;
+    --card-foreground: 232 8.2% 99.65%;
+
+    --border: 232 41% 27.900000000000002%;
+    --input: 232 41% 27.900000000000002%;
+
+    --primary: 232 82% 93%;
+    --primary-foreground: 232 8.2% 9.3%;
+
+    --secondary: 232 41% 27.900000000000002%;
+    --secondary-foreground: 232 8.2% 99.65%;
+
+    --accent: 232 41% 27.900000000000002%;
+    --accent-foreground: 232 8.2% 99.65%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 232 8.2% 99.65%;
+
+    --ring: 232 82% 93%;
   }
 }
- 
+
 @layer base {
   * {
     @apply border-border;
@@ -73,4 +110,11 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+html,
+body {
+  background: hsl(var(--background) / 60%);
+}
+body {
+  min-height: 100vh;
 }
