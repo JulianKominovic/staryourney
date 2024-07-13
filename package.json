@@ -10,6 +10,9 @@
     "tauri": "tauri"
   },
   "dependencies": {
+    "@blocknote/core": "^0.14.5",
+    "@blocknote/mantine": "^0.14.6",
+    "@blocknote/react": "^0.14.6",
     "@blocksuite/blocks": "0.16.0-canary-202407111443-af2ef83",
     "@blocksuite/presets": "0.16.0-canary-202407111443-af2ef83",
     "@blocksuite/store": "0.16.0-canary-202407111443-af2ef83",

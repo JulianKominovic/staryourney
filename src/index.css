@@ -108,10 +108,21 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
   }
 }
 
 body {
   min-height: 100vh;
+}
+
+/* Editor css */
+.bn-mantine {
+  --bn-colors-side-menu: #505050;
+  --bn-colors-hovered-background: rgba(0, 0, 0, 0.05);
+}
+.bn-editor {
+  @apply bg-transparent text-foreground;
+  padding: 1rem;
+  border-radius: var(--radius);
 }

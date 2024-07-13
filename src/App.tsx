@@ -16,7 +16,12 @@
 // import { Input } from "./components/ui/input";
 // import { User, Computer, SquareGantt } from "lucide-react";
 // import { Button } from "./components/ui/button";
-import Editor, { EditorProvider } from "./components/molecules/MarkdownEditor";
+import Editor from "./components/molecules/MarkdownEditor";
+import Entries from "./components/organisms/Entries";
+import NewEntry from "./components/organisms/NewEntry";
+import { Button } from "./components/ui/button";
+import "@blocknote/core/fonts/inter.css";
+import "@blocknote/mantine/style.css";
 
 // type Message = {
 //   role: "user" | "assistant";
@@ -135,26 +140,22 @@ function App() {
   // }
 
   return (
-    <EditorProvider>
-      <div className="px-8 py-8 pt-12">
-        <h1 className="mx-auto text-4xl font-semibold text-center">
+    <div className="w-full grid grid-rows-1 grid-cols-[220px_4fr] h-[100dvh] overflow-x-hidden">
+      <aside className="w-full h-full pt-10">
+        {/* <h1 className="mx-auto text-4xl font-semibold text-center">
           Staryourney
         </h1>
         <h2 className="text-center text-muted-foreground">
           You write, AI opinionates.
-        </h2>
-
-        <Editor />
-        {/* <Tldraw
-        className="h-screen"
-        onMount={(editor) => {
-          editor.store.onAfterCreate = (shape) => {
-            console.log("Shape created", shape);
-          };
-        }}
-      ></Tldraw> */}
-      </div>
-    </EditorProvider>
+        </h2> */}
+      </aside>
+      <main className="w-full h-full px-2 py-2">
+        <div className="h-full px-8 py-8 pt-12 overflow-y-auto bg-white rounded-lg shadow-2xl">
+          <NewEntry />
+          <Entries />
+        </div>
+      </main>
+    </div>
   );
 }
 
