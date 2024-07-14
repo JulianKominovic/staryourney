@@ -16,13 +16,12 @@
 // import { Input } from "./components/ui/input";
 // import { User, Computer, SquareGantt } from "lucide-react";
 // import { Button } from "./components/ui/button";
-import Editor from "./components/molecules/MarkdownEditor";
 import Entries from "./components/organisms/Entries";
-import NewEntry from "./components/organisms/NewEntry";
+
 import { Button } from "./components/ui/button";
 import "@blocknote/core/fonts/inter.css";
 import "@blocknote/mantine/style.css";
-
+import { updateOrCreateSnapshot } from "./database/editor";
 // type Message = {
 //   role: "user" | "assistant";
 //   content: string;
@@ -141,17 +140,65 @@ function App() {
 
   return (
     <div className="w-full grid grid-rows-1 grid-cols-[220px_4fr] h-[100dvh] overflow-x-hidden">
-      <aside className="w-full h-full pt-10">
+      <nav
+        data-tauri-drag-region
+        className="fixed top-0 left-0 w-full h-[46px]"
+      ></nav>
+      <aside className="flex flex-col w-full h-full pl-2">
         {/* <h1 className="mx-auto text-4xl font-semibold text-center">
           Staryourney
         </h1>
         <h2 className="text-center text-muted-foreground">
           You write, AI opinionates.
         </h2> */}
+        <Button
+          variant={"ghost"}
+          className="mt-40"
+          onClick={() => {
+            const uuid = crypto.randomUUID();
+            updateOrCreateSnapshot(
+              uuid,
+              JSON.stringify([
+                {
+                  id: "00d33438-1409-45fc-ac53-d55f89fd6aa6",
+                  type: "heading",
+                  props: {
+                    textColor: "default",
+                    backgroundColor: "default",
+                    textAlignment: "left",
+                    level: 1,
+                  },
+                  content: [
+                    {
+                      type: "text",
+                      text: "What are you thinking?",
+                      styles: {},
+                    },
+                  ],
+                  children: [],
+                },
+                {
+                  id: "33967d08-821c-47fe-ad5b-eb9c2422ce7c",
+                  type: "paragraph",
+                  props: {
+                    textColor: "default",
+                    backgroundColor: "default",
+                    textAlignment: "left",
+                  },
+                  content: [],
+                  children: [],
+                },
+              ])
+            ).finally(() => {
+              window.location.reload();
+            });
+          }}
+        >
+          New Entry
+        </Button>
       </aside>
-      <main className="w-full h-full px-2 py-2">
-        <div className="h-full px-8 py-8 pt-12 overflow-y-auto bg-white rounded-lg shadow-2xl">
-          <NewEntry />
+      <main className="w-full h-full px-2 py-2 overflow-y-auto">
+        <div className="h-full px-8 py-8 pt-12 overflow-y-auto rounded-lg shadow-lg bg-neutral-100">
           <Entries />
         </div>
       </main>
