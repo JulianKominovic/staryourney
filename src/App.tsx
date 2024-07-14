@@ -17,11 +17,9 @@
 // import { User, Computer, SquareGantt } from "lucide-react";
 // import { Button } from "./components/ui/button";
 import Entries from "./components/organisms/Entries";
-import { AnimatePresence, motion } from "framer-motion";
-import { Button } from "./components/ui/button";
+import { motion } from "framer-motion";
 import "@blocknote/core/fonts/inter.css";
 import "@blocknote/mantine/style.css";
-import { updateOrCreateSnapshot } from "./database/editor";
 import Sidebar from "./components/organisms/Sidebar";
 import Navbar from "./components/organisms/Navbar";
 import useUI from "./stores/ui";

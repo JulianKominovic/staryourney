@@ -87,14 +87,21 @@ function LinkPreview({ url }: { url: string }) {
   }, [url]);
   if (ogInfo)
     return (
-      <div className="p-1">
+      <div className="w-full h-full p-1 px-2">
         <img
+          onError={(e) => {
+            e.currentTarget.remove();
+          }}
           src={ogInfo.filename}
           alt=""
-          className="w-auto h-32 mx-auto rounded-md"
+          className="w-full h-auto mx-auto rounded-md"
         />
-        {/* <div className="mt-2 text-base font-bold">{ogInfo.title}</div>
-        <div className="text-xs text-gray-500">{ogInfo.description}</div> */}
+        <div className="mt-2 text-base font-bold line-clamp-1">
+          {ogInfo.title}
+        </div>
+        <div className="text-xs text-gray-500 line-clamp-2">
+          {ogInfo.description}
+        </div>
       </div>
     );
   return <div className="p-4">Loading...</div>;
@@ -124,7 +131,7 @@ const MarkdownEditor = ({
         sideMenu={(props) => (
           <SideMenu {...props}>
             {/* Button which removes the hovered block. */}
-            <AddBlockButton {...props} />
+            {/* <AddBlockButton {...props} /> */}
             <RemoveBlockButton {...props} />
             <DragHandleButton {...props} />
           </SideMenu>
@@ -134,7 +141,7 @@ const MarkdownEditor = ({
         linkToolbar={(props) => {
           return (
             <LinkToolbar {...props}>
-              <div className="">
+              <div className="grid grid-cols-1 grid-rows-[1fr_40px] w-60 max-h-72">
                 <LinkPreview url={props.url} />
                 <div className="flex pb-0.5 items-center px-1">
                   <EditLinkButton {...props} />

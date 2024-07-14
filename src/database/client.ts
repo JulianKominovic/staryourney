@@ -14,9 +14,15 @@ function createOgMetadata() {
     "CREATE TABLE IF NOT EXISTS og_metadata (url TEXT PRIMARY KEY, title TEXT, description TEXT, filename TEXT)"
   );
 }
+function createKeywordsTable() {
+  return db.execute(
+    "CREATE TABLE IF NOT EXISTS keywords(keyword TEXT, snapshot_id TEXT, FOREIGN KEY(snapshot_id) REFERENCES snapshots(id), PRIMARY KEY (keyword, snapshot_id))"
+  );
+}
 // await db.execute(`
-//         DROP TABLE IF EXISTS snapshots
+//         DROP TABLE IF EXISTS keywords;
 //       `);
-await createEditorTable();
-await createOgMetadata();
+await createEditorTable().catch(console.error);
+await createOgMetadata().catch(console.error);
+await createKeywordsTable().catch(console.error);
 export default db;

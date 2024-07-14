@@ -78,6 +78,7 @@
     "tailwindcss-animate": "^1.0.7",
     "tauri-plugin-sql-api": "github:tauri-apps/tauri-plugin-sql#v1",
     "title-editorjs": "^1.0.2",
+    "vite-plugin-node-polyfills": "^0.22.0",
     "zustand": "^4.5.4"
   },
   "devDependencies": {

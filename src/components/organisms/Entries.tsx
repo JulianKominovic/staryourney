@@ -1,25 +1,20 @@
-import {
-  getSnapshots,
-  SnapshotModel,
-  updateOrCreateSnapshot,
-} from "@/database/editor";
-import { cn } from "@/lib/utils";
+import { SnapshotModel } from "@/database/editor";
 import { BlockNoteEditor } from "@blocknote/core";
-import { useBlockNoteEditor } from "@blocknote/react";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import MarkdownEditor, {
   customEditorSettings,
 } from "../molecules/editor/MarkdownEditor";
-import { getEntriesGrouppedByDate } from "@/integration/entries";
+
 import { getRelativeTime } from "@/lib/dates";
+import useEntries, { EntriesStore } from "@/stores/entries";
 
 type Props = {};
 
-function Entry({ entry }: { entry: SnapshotModel }) {
-  const initialContent = JSON.parse(entry.data);
+function Entry({ entry }: { entry: EntriesStore["entries"][0] }) {
+  const createOrUpdateEntry = useEntries((state) => state.createOrUpdateEntry);
   const editor = BlockNoteEditor.create({
     ...customEditorSettings,
-    initialContent,
+    initialContent: entry.data,
   });
   return (
     <article className="mt-8">
@@ -29,7 +24,12 @@ function Entry({ entry }: { entry: SnapshotModel }) {
       <div className="pl-16 mt-10 bg-white rounded-xl" id={entry.id}>
         <MarkdownEditor
           onChange={({ blocks }) => {
-            updateOrCreateSnapshot(entry.id, JSON.stringify(blocks));
+            createOrUpdateEntry({
+              id: entry.id,
+              data: JSON.stringify(blocks),
+              last_modified: new Date().toISOString(),
+              created_at: entry.created_at,
+            });
           }}
           editor={editor as any}
         />
@@ -39,13 +39,11 @@ function Entry({ entry }: { entry: SnapshotModel }) {
 }
 
 const Entries = (props: Props) => {
-  const [entries, setEntries] =
-    useState<Record<number, Record<string, Record<string, SnapshotModel[]>>>>();
-  useEffect(() => {
-    getEntriesGrouppedByDate().then(setEntries);
-  }, []);
+  const getEntriesGrouppedByDate = useEntries(
+    (state) => state.getEntriesGrouppedByDate
+  );
 
-  const grouppedEntries = Object.entries(entries ?? {});
+  const grouppedEntries = Object.entries(getEntriesGrouppedByDate() ?? {});
 
   return grouppedEntries.flatMap(([year, months]) => {
     return (

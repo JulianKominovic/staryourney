@@ -14,7 +14,7 @@ function getSnapshot(id: string): Promise<SnapshotModel> {
   return db.select("SELECT * FROM snapshots WHERE id=?", [id]);
 }
 function getSnapshots(): Promise<SnapshotModel[]> {
-  return db.select("SELECT * FROM snapshots ORDER BY last_modified DESC");
+  return db.select("SELECT * FROM snapshots ORDER BY created_at DESC");
 }
 
 function updateOrCreateSnapshot(

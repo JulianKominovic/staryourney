@@ -1703,6 +1703,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "keyphrases"
+version = "0.3.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4a4e171437b3fc556d1b338ee2f3ea7353fc566b1784439aa077ebfb55da4d0a"
+dependencies = [
+ "regex",
+]
+
+[[package]]
 name = "kuchiki"
 version = "0.8.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3377,6 +3386,7 @@ name = "staryourney"
 version = "0.1.0"
 dependencies = [
  "cocoa 0.25.0",
+ "keyphrases",
  "objc",
  "rand 0.8.5",
  "serde",

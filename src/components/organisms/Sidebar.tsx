@@ -1,24 +1,26 @@
-import { motion } from "framer-motion";
 import { Button, buttonVariants } from "../ui/button";
 import { updateOrCreateSnapshot } from "@/database/editor";
 import useUI from "@/stores/ui";
 import { cn } from "@/lib/utils";
 import { PlusCircle } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
-import { getEntriesTitles } from "@/integration/entries";
+import { getKeywords, KeywordsModel } from "@/database/keywords";
+import useEntries from "@/stores/entries";
 
 type Props = {};
 
 const Sidebar = () => {
   const sidebarOpen = useUI((state) => state.sidebarOpen);
-  const [entries, setEntries] = useState<{ id: string; title: string }[]>([]);
+  const getEntriesTitles = useEntries((state) => state.getEntriesTitles);
+  const [keywords, setKeywords] = useState<KeywordsModel[]>([]);
   useEffect(() => {
-    getEntriesTitles().then(setEntries);
+    getKeywords().then(setKeywords);
   }, []);
+  console.log("keywords", keywords);
   return (
     <aside
       className={cn(
-        "flex flex-col pt-12 h-full pl-2 w-full transition-opacity",
+        "flex flex-col pt-12 h-full pl-4 pr-2 w-full transition-opacity",
         {
           "opacity-0": !sidebarOpen,
           "opacity-100": sidebarOpen,
@@ -31,8 +33,12 @@ const Sidebar = () => {
         <h2 className="text-center text-muted-foreground">
           You write, AI opinionates.
         </h2> */}
+      <p className="text-[10px] text-neutral-600 my-2 after:bg-neutral-600 after:h-px after:w-full after:inline-block">
+        Entries
+      </p>
+
       <ul>
-        {entries.map((entry) => (
+        {getEntriesTitles().map((entry) => (
           <li key={entry.id} className="">
             <a
               href={`#${entry.id}`}
@@ -44,6 +50,22 @@ const Sidebar = () => {
             >
               {entry.title}
             </a>
+          </li>
+        ))}
+      </ul>
+      <p className="text-[10px] text-neutral-600 my-2">Keywords</p>
+      <ul className="flex flex-wrap gap-1">
+        {keywords.map(({ keyword, snapshot_id }) => (
+          <li key={keyword} className="">
+            <Button
+              onClick={() => {}}
+              variant={"default"}
+              className={cn(
+                "justify-start w-full h-auto px-2 py-1 text-xs rounded-full"
+              )}
+            >
+              {keyword}
+            </Button>
           </li>
         ))}
       </ul>

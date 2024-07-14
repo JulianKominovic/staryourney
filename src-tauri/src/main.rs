@@ -9,9 +9,10 @@ extern crate cocoa;
 #[macro_use]
 extern crate objc;
 use window_vibrancy::{apply_blur, apply_vibrancy, NSVisualEffectMaterial};
+mod events;
 mod plugins;
+use events::get_keywords_event::get_keywords_event;
 use plugins::macos_traffic_lights::{init, setup_traffic_light_positioner};
-
 fn main() {
     tauri::Builder::default()
         .setup(move |app| {
@@ -34,7 +35,7 @@ fn main() {
 
             Ok(())
         })
-        .invoke_handler(tauri::generate_handler![])
+        .invoke_handler(tauri::generate_handler![get_keywords_event])
         .plugin(tauri_plugin_sql::Builder::default().build())
         .plugin(init())
         .run(tauri::generate_context!())
