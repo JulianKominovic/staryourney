@@ -76,7 +76,8 @@
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
     "tauri-plugin-sql-api": "github:tauri-apps/tauri-plugin-sql#v1",
-    "title-editorjs": "^1.0.2"
+    "title-editorjs": "^1.0.2",
+    "zustand": "^4.5.4"
   },
   "devDependencies": {
     "@tauri-apps/cli": "^1.5.6",

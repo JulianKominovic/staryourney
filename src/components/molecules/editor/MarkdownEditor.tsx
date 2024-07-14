@@ -82,8 +82,8 @@ function LinkPreview({ url }: { url: string }) {
           alt=""
           className="w-auto h-32 mx-auto rounded-md"
         />
-        <div className="mt-2 text-base font-bold">{ogInfo.title}</div>
-        <div className="text-xs text-gray-500">{ogInfo.description}</div>
+        {/* <div className="mt-2 text-base font-bold">{ogInfo.title}</div>
+        <div className="text-xs text-gray-500">{ogInfo.description}</div> */}
       </div>
     );
   return <div className="p-4">Loading...</div>;
@@ -125,7 +125,7 @@ const MarkdownEditor = ({
             <LinkToolbar {...props}>
               <div className="">
                 <LinkPreview url={props.url} />
-                <div className="flex items-center px-1 py-1 border-t border-neutral-100">
+                <div className="flex items-center px-1">
                   <EditLinkButton {...props} />
                   <OpenLinkButton {...props} />
                   <DeleteLinkButton {...props} />
