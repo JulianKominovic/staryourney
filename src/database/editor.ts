@@ -5,24 +5,27 @@ export type SnapshotModel = {
   id: string;
   data: string;
   // ISO date string
-  last_modification: string;
+  last_modified: string;
+  // ISO date string
+  created_at: string;
 };
 
 function getSnapshot(id: string): Promise<SnapshotModel> {
   return db.select("SELECT * FROM snapshots WHERE id=?", [id]);
 }
 function getSnapshots(): Promise<SnapshotModel[]> {
-  return db.select("SELECT * FROM snapshots");
+  return db.select("SELECT * FROM snapshots ORDER BY last_modified DESC");
 }
 
 function updateOrCreateSnapshot(
   id: string,
   data: string,
-  last_modification = new Date().toISOString()
+  last_modified = new Date().toISOString(),
+  created_at = new Date().toISOString()
 ): Promise<QueryResult> {
   return db.execute(
-    "INSERT INTO snapshots (id, data, last_modification) VALUES (?, ?, ?) ON CONFLICT(id) DO UPDATE SET data=?",
-    [id, data, last_modification, data]
+    "INSERT INTO snapshots (id, data, last_modified, created_at) VALUES (?, ?, ?, ?) ON CONFLICT(id) DO UPDATE SET data=?, last_modified=?",
+    [id, data, last_modified, created_at, data, last_modified]
   );
 }
 function deleteSnapshot(id: string): Promise<QueryResult> {

@@ -40,7 +40,7 @@ export async function getOgInfo(url: string): Promise<OgMetadataModel> {
   };
   try {
     const { result } = await ogs(options);
-
+    console.log("result", result);
     const object: OgMetadataModel = {
       url,
       title: result.ogTitle ?? "",
@@ -48,6 +48,7 @@ export async function getOgInfo(url: string): Promise<OgMetadataModel> {
       filename: result.ogImage?.at(0)?.url ?? "",
     };
     if (object.filename) {
+      console.log("object.filename", object.filename);
       const { data: imageBlob } = await getImageFromUrl(object.filename);
       const encodeFilename = encodeURIComponent(object.filename);
       object.filename = encodeFilename;

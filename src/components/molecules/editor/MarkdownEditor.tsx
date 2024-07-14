@@ -3,6 +3,7 @@ import {
   DeleteLinkButton,
   DragHandleButton,
   EditLinkButton,
+  FileReplaceButton,
   LinkToolbar,
   LinkToolbarController,
   OpenLinkButton,
@@ -114,8 +115,8 @@ const MarkdownEditor = ({
           <SideMenu {...props}>
             {/* Button which removes the hovered block. */}
             <AddBlockButton {...props} />
-            <RemoveBlockButton {...props} />
-            <DragHandleButton {...props} />
+            {/* <RemoveBlockButton {...props} /> */}
+            {/* <DragHandleButton {...props} /> */}
           </SideMenu>
         )}
       />
@@ -125,9 +126,8 @@ const MarkdownEditor = ({
             <LinkToolbar {...props}>
               <div className="">
                 <LinkPreview url={props.url} />
-                <div className="flex items-center px-1">
+                <div className="flex pb-0.5 items-center px-1">
                   <EditLinkButton {...props} />
-                  <OpenLinkButton {...props} />
                   <DeleteLinkButton {...props} />
                 </div>
               </div>

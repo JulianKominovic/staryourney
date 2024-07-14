@@ -3,9 +3,10 @@ import Database from "tauri-plugin-sql-api";
 
 // sqlite. The path is relative to `tauri::api::path::BaseDirectory::App`.
 const db = await Database.load("sqlite:" + ENTRIES_DATABASE_FILENAME);
+
 function createEditorTable() {
   return db.execute(
-    "CREATE TABLE IF NOT EXISTS snapshots (id TEXT PRIMARY KEY, data TEXT, last_modification DATETIME DEFAULT CURRENT_TIMESTAMP)"
+    "CREATE TABLE IF NOT EXISTS snapshots (id TEXT PRIMARY KEY, data TEXT, last_modified DATETIME DEFAULT CURRENT_TIMESTAMP, created_at DATETIME DEFAULT CURRENT_TIMESTAMP)"
   );
 }
 function createOgMetadata() {
