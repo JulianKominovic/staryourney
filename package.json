@@ -73,6 +73,7 @@
     "react-dom": "^18.2.0",
     "slate": "^0.103.0",
     "slate-react": "^0.107.0",
+    "spark-md5": "^3.0.2",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
     "tauri-plugin-sql-api": "github:tauri-apps/tauri-plugin-sql#v1",

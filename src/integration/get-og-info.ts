@@ -6,7 +6,7 @@ import {
   getOgMetadataByUrl,
   OgMetadataModel,
 } from "@/database/og-metadata";
-import { writeImageToDisk } from "./filesystem";
+import { writeBinaryFileToDisk } from "./filesystem";
 
 function getHTMLFromUrl(url: string) {
   return fetch(url, {
@@ -52,7 +52,7 @@ export async function getOgInfo(url: string): Promise<OgMetadataModel> {
       const { data: imageBlob } = await getImageFromUrl(object.filename);
       const encodeFilename = encodeURIComponent(object.filename);
       object.filename = encodeFilename;
-      await writeImageToDisk(object.filename, imageBlob as any);
+      await writeBinaryFileToDisk(object.filename, imageBlob as any);
     }
     await createOrUpdateOgMetadata(object);
     return object;

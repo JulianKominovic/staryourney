@@ -3,10 +3,8 @@ import {
   DeleteLinkButton,
   DragHandleButton,
   EditLinkButton,
-  FileReplaceButton,
   LinkToolbar,
   LinkToolbarController,
-  OpenLinkButton,
   SideMenu,
   SideMenuController,
   useCreateBlockNote,
@@ -41,6 +39,8 @@ import { useEffect, useState } from "react";
 import { OgMetadataModel } from "@/database/og-metadata";
 import { getOgInfo } from "@/integration/get-og-info";
 import { getAsset } from "@/integration/get-asset";
+import { writeBinaryFileToDisk } from "@/integration/filesystem";
+import { arrayBufferSha256 } from "@/lib/encoders";
 
 // Custom Side Menu button to remove the hovered block.
 export function RemoveBlockButton(props: SideMenuProps) {
@@ -63,7 +63,17 @@ export function RemoveBlockButton(props: SideMenuProps) {
   );
 }
 
-export const customEditorSettings = {};
+export const customEditorSettings = {
+  uploadFile: async (file: File) => {
+    console.log(file);
+    const arrayBuffer = await file.arrayBuffer();
+    const sha = await arrayBufferSha256(arrayBuffer);
+    const extension = file.name.split(".").pop();
+    const filename = sha + "." + extension;
+    await writeBinaryFileToDisk(filename, arrayBuffer);
+    return await getAsset(filename);
+  },
+};
 
 function LinkPreview({ url }: { url: string }) {
   const [ogInfo, setOgInfo] = useState<OgMetadataModel>();
@@ -115,8 +125,8 @@ const MarkdownEditor = ({
           <SideMenu {...props}>
             {/* Button which removes the hovered block. */}
             <AddBlockButton {...props} />
-            {/* <RemoveBlockButton {...props} /> */}
-            {/* <DragHandleButton {...props} /> */}
+            <RemoveBlockButton {...props} />
+            <DragHandleButton {...props} />
           </SideMenu>
         )}
       />

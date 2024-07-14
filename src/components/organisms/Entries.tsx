@@ -26,7 +26,7 @@ function Entry({ entry }: { entry: SnapshotModel }) {
       <span className="px-2 py-1 text-xs rounded-full cursor-default select-none text-neutral-600">
         {getRelativeTime(new Date(entry.created_at))}
       </span>
-      <div className="pl-4 mt-2 bg-white rounded-xl" id={entry.id}>
+      <div className="pl-16 mt-10 bg-white rounded-xl" id={entry.id}>
         <MarkdownEditor
           onChange={({ blocks }) => {
             updateOrCreateSnapshot(entry.id, JSON.stringify(blocks));
